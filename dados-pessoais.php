@@ -20,4 +20,16 @@
 
             return $res;
         }
+
+        public function update($id,$nome,$idade,$email){
+            $db = new Database("dados_pessoais");
+
+            $res = $db->update("id =" . $id, [
+                "nome" => $nome,
+                "idade" => $idade,
+                "email" => $email
+            ]);
+
+            return $res;
+        }
     }

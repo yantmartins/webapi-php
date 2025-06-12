@@ -56,5 +56,22 @@
                 //throw $th;
             }
         }
+
+        public function update($where, $array) {
+            try {
+                $fields = array_keys($array);
+                $binds = array_values($array);
+
+                $query = "UPDATE " . $this->table . " SET " . implode("=?,", $fields) .  "=? WHERE " . $where;
+
+                $res = $this->execute($query, $binds);
+
+                return $res ? true : false;
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
+
+
     }
+}
 ?>
