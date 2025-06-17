@@ -42,6 +42,16 @@
             }
         }
 
+        public function select($fields = "*"){
+            try {
+                $query = "SELECT " . $fields . " FROM " . $this->table;
+
+                return $this->execute($query);
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
+        }
+
         public function insert($values) {
             try {
                 $fields = array_keys($values);
@@ -70,8 +80,23 @@
             } catch (\Throwable $th) {
                 //throw $th;
             }
+    }
 
+        public function delete($where){
+            try {
+                $query = "DELETE FROM " . $this->table . " WHERE " .$where;
+                $del = $this->execute($query);
+                $del = $del->rowCount();
 
+                if ($del == 1) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (\Throwable $th) {
+            //throw $th;
+            }
     }
 }
+
 ?>

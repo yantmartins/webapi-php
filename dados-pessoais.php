@@ -9,13 +9,36 @@
 
         public string $email;
 
-        public function cadastrar() {
+        
+
+        public function buscar_todos(){
+            $db = new Database("dados_pessoais");
+            $stmt = $db->select();
+
+            $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            return $res;
+        }
+
+        public function deletar($id){
+            try {
+                $db = new Database("dados_pessoais");
+
+                $res = $db->delete("id = " . $id);
+
+                return $res;
+            } catch (\Throwable $th) {
+                //throw $th;
+            }
+        }
+
+        public function cadastrar($nome, $idade, $email) {
             $db = new Database("dados_pessoais");
 
             $res = $db->insert([
-                "nome" => $this->nome,
-                "idade" => $this->idade,
-                "email" => $this->email
+                "nome" => $nome,
+                "idade" => $idade,
+                "email" => $email
             ]);
 
             return $res;

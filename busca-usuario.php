@@ -1,13 +1,12 @@
 <?php
 
-require 'Database.php';
+require 'dados-pessoais.php';
 
 try {
-    $db = new Database("dados_pessoais");
-    $conn = $db->conectar();
-    $stmt = $conn->prepare("SELECT * FROM dados_pessoais");
-    $stmt->execute();
-    $res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $dados_pessoais = new DadosPessoais();
+    
+    $res = $dados_pessoais->buscar_todos();
+   
     echo json_encode($res);
 
 } catch (\Throwable $th) {
